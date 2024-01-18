@@ -12,13 +12,19 @@ const Alert: React.FC<AlertProps> = ({alertValue, setAlertValue}) => {
   }
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      console.log('Timeout completed!');
-      setAlertValue('');
-    }, 4000);
+    if (alertValue !== "") {
+      const timeoutId = setTimeout(() => {
+        console.log('Timeout completed!');
+        setAlertValue('');
+      }, 4000);
 
-    return () => clearTimeout(timeoutId);
-  }, []);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [alertValue, setAlertValue]);
+
+  if (alertValue === "") {
+    return null;
+  }
 
   
   return(

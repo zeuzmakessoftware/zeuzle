@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Grid from "../components/Grid";
 import Keyboard from "../components/Keyboard";
 import Alert from "../components/Alert";
@@ -83,7 +83,7 @@ const Application = () => {
     }
   }, [letters, letters.length, gameOver, flipping, usedLetters, alertValue, playAgain]);
 
-  const processEnterKey = () => {
+  const processEnterKey = useCallback(() => {
     let colors = new Array(letterCount).fill(0);
     let localWon = letters.every((letter, index) => letter === wordArray[index]);
 
@@ -151,7 +151,7 @@ const Application = () => {
         setLetters([]);
         setRowNum(rowNum + 1);
     } 
-  }
+  }, [letters, rowNum, gridAmount, correctWord]);
 
   const handleLetterClick = (letter: string) => {
     if (letters.length < letterCount && !gameOver && !youWin) {

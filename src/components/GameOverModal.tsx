@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import GOMWordReveal from "../components/GOMWordReveal";
 
 interface GameOverModalProps {
@@ -16,11 +16,11 @@ interface GameOverModalProps {
 const GameOverModal: React.FC<GameOverModalProps> = ({ on, word, rowNum, playAgain, setPlayAgain, setEndModal, gameOver, youWin, gridAmount }) => {
   const [visible, setVisible] = useState(false);
   const [guesslol, setGuess] = useState('')
-  let timeoutId: NodeJS.Timeout | null = null;
+  const timeoutId = useRef<NodeJS.Timeout | null>(null);
 
   const handleClose = () => {
-    if(timeoutId) {
-      clearTimeout(timeoutId);
+    if(timeoutId.current) {
+      clearTimeout(timeoutId.current);
     }
     setVisible(false);
     setEndModal(false);
@@ -46,18 +46,18 @@ const GameOverModal: React.FC<GameOverModalProps> = ({ on, word, rowNum, playAga
       }
     }
     if (on) {
-      timeoutId = setTimeout(() => {
-        setVisible(true);
-      }, 0);
-    } else {
-      handleClose();
-    }
-    return () => {
-      if(timeoutId) {
-        clearTimeout(timeoutId);
+        timeoutId.current = setTimeout(() => {
+          setVisible(true);
+        }, 0);
+      } else {
+        handleClose();
       }
-    };
-  }, [on]);
+      return () => {
+        if(timeoutId.current) {
+          clearTimeout(timeoutId.current);
+        }
+      };
+    }, [on]);
 
   if (!visible) {
     return null;

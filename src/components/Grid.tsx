@@ -29,16 +29,16 @@ const Grid: React.FC<GridProps> = ({ letters, rowNum, gridAmount, letterCount, c
     let newWords = [...words];
     newWords[rowNum] = letters.join('');
     setWords(newWords);
-
+  
     let newColors = [...colors];
     newColors[rowNum - lastRow] = color;
     setColors(newColors);
-
+  
     if (playAgain) {
       setWords(initialWordsArray);
       setColors(initialColorsArray);
     }
-  }, [letters, rowNum, lastRow, playAgain]);
+  }, [letters, rowNum, lastRow, playAgain, color, colors, initialColorsArray, initialWordsArray, words]);
 
   useEffect(() => {
     if (gridRef.current) {
