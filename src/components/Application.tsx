@@ -7,7 +7,7 @@ import GameOverModal from "../components/GameOverModal";
 
 const Application = () => {
   
-  const correctWord = "react"
+  const correctWord = "swift"
     .toUpperCase();
   const gridAmount = 6
     -1;
