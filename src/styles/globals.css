@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  background-color: #111111;
+}
+@keyframes flip {
+  0% {
+    transform: perspective(800px) rotateX(0deg);
+  }
+  25% {
+    transform: perspective(800px) rotateX(90deg);
+  }
+  50% {
+    transform: perspective(800px) rotateX(180deg);
+  }
+  75% {
+    transform: perspective(800px) rotateX(270deg);
+  }
+  100% {
+    transform: perspective(800px) rotateX(360deg);
+  }
+}
+
+.flip {
+  animation: flip 1.5s ease-out;
+  transform-style: preserve-3d;
+}
+
+.alert {
+  transition: opacity 2s;
+  opacity: 1;
+}
+
+.alert:leave-active {
+  opacity: 0;
+}
